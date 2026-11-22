@@ -150,7 +150,7 @@ class SosEventService {
 
       if (effectiveResult.status == 'failed' &&
           latestDelivery['fallbackEligible'] == true) {
-        return _callFallback(docRef: docRef);
+        return await _callFallback(docRef: docRef);
       }
 
       return effectiveResult;

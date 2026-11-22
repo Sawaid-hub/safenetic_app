@@ -1,6 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:safenetic_app/models/alert_model.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 void main() {
   group('AlertModel', () {
