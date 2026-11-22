@@ -1,0 +1,29 @@
+# Secrets — NEVER commit these
+serviceAccountKey.json
+*.json
+!package.json
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+venv/
+.venv/
+*.egg-info/
+dist/
+build/
+
+# Cloudflare (local Windows binary — not needed on cloud)
+cloudflared.exe
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Env
+.env

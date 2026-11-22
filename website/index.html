@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SafeNetic — AI-Powered Personal Safety</title>
+    <meta name="description" content="SafeNetic is an AI-powered personal safety app that detects falls, distress sounds, and motion anomalies to automatically alert your guardians in real-time.">
+    <meta name="keywords" content="personal safety, fall detection, SOS app, emergency alert, AI safety, guardian alert">
+    <meta name="author" content="SafeNetic">
+    <meta name="theme-color" content="#0F0F0F">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="SafeNetic — AI-Powered Personal Safety">
+    <meta property="og:description" content="Automatic fall detection, distress sound recognition, and instant guardian alerts. Your AI safety companion.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://safenetic.online">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Background Effects -->
+    <div class="bg-grid"></div>
+    <div class="bg-glow bg-glow--red"></div>
+    <div class="bg-glow bg-glow--teal"></div>
+
+    <!-- Card Overlay -->
+    <div class="card-overlay" id="cardOverlay"></div>
+
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <div class="nav__inner">
+            <a href="#" class="nav__logo">
+                <div class="nav__logo-icon">🛡️</div>
+                SafeNetic
+            </a>
+            <ul class="nav__links" id="navLinks">
+                <li><a href="#features" class="nav__link" onclick="closeMenu()">Features</a></li>
+                <li><a href="#how-it-works" class="nav__link" onclick="closeMenu()">How It Works</a></li>
+                <li><a href="#download" class="nav__link" onclick="closeMenu()">Download</a></li>
+                <li><a href="#download" class="nav__cta" onclick="closeMenu()">Get the App</a></li>
+            </ul>
+            <div class="nav__hamburger" id="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero__inner">
+            <div class="hero__content">
+                <div class="hero__badge">
+                    <span class="hero__badge-dot"></span>
+                    AI-Powered Safety
+                </div>
+                <h1 class="hero__title">
+                    Your Safety,<br>
+                    <span class="hero__title-highlight">Always On.</span>
+                </h1>
+                <p class="hero__subtitle">
+                    SafeNetic uses on-device AI to detect falls, distress sounds, and motion anomalies — automatically alerting your guardians before you even ask for help.
+                </p>
+                <div class="hero__actions">
+                    <a href="#download" class="btn btn--primary">
+                        <span>⬇</span> Download APK
+                    </a>
+                    <a href="#features" class="btn btn--secondary">
+                        <span>→</span> Explore Features
+                    </a>
+                </div>
+            </div>
+            <div class="hero__visual">
+                <div class="phone-mockup">
+                    <div class="phone-mockup__notch"></div>
+                    <div class="phone-mockup__screen">
+                        <div class="phone-mockup__label">PROTECTION ACTIVE</div>
+                        <div class="phone-mockup__sos">SOS</div>
+                        <div class="phone-mockup__status">
+                            <div class="phone-mockup__status-dot"></div>
+                            <div class="phone-mockup__status-dot"></div>
+                            <div class="phone-mockup__status-dot"></div>
+                        </div>
+                        <div class="phone-mockup__label">ALL SENSORS ONLINE</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Bar -->
+    <section class="stats reveal">
+        <div class="stats__inner">
+            <div class="stat">
+                <div class="stat__number" data-target="3">0</div>
+                <div class="stat__label">AI Detection Models</div>
+            </div>
+            <div class="stat">
+                <div class="stat__number">&lt;2s</div>
+                <div class="stat__label">Alert Response Time</div>
+            </div>
+            <div class="stat">
+                <div class="stat__number">24/7</div>
+                <div class="stat__label">Background Monitoring</div>
+            </div>
+            <div class="stat">
+                <div class="stat__number">100%</div>
+                <div class="stat__label">On-Device Processing</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="section-header reveal">
+            <span class="section-label">Features</span>
+            <h2 class="section-title">Intelligent Protection</h2>
+            <p class="section-subtitle">
+                Four layers of AI-driven safety that work together to keep you protected at all times.
+            </p>
+        </div>
+        <div class="features__grid">
+
+            <!-- Fall Detection -->
+            <div class="feature-card-container reveal">
+                <div class="feature-card-inner">
+                    <div class="feature-card feature-card--front">
+                        <div class="feature-card__icon feature-card__icon--fall">🔻</div>
+                        <h3 class="feature-card__title">Fall Detection</h3>
+                        <p class="feature-card__desc">
+                            On-device machine learning analyzes accelerometer data from your phone and wearable devices to instantly detect falls. If you don't respond within a customizable countdown, your guardians are alerted automatically.
+                        </p>
+                        <span class="feature-card__tag feature-card__tag--ai">AI Powered</span>
+                        <span class="feature-card__hint">🔄 Click to learn more</span>
+                    </div>
+                    <div class="feature-card feature-card--back">
+                        <div class="feature-card__back-header">
+                            <span class="feature-card__back-icon">🔻</span>
+                            <h3 class="feature-card__title">How Fall Detection Works</h3>
+                        </div>
+                        <div class="feature-card__back-section">
+                            <h4 class="feature-card__back-label">⚙️ How It Works</h4>
+                            <p class="feature-card__desc">SafeNetic uses a TensorFlow Lite model running entirely on your device. It continuously reads accelerometer and gyroscope data, analyzing sudden deceleration patterns that match fall signatures. When a fall is detected, a 30-second countdown begins — if you don't cancel, an alert fires.</p>
+                        </div>
+                        <div class="feature-card__back-section">
+                            <h4 class="feature-card__back-label">✨ Effects</h4>
+                            <ul class="feature-card__effects">
+                                <li>Automatic emergency alert to all guardians</li>
+                                <li>Live GPS location shared instantly</li>
+                                <li>Works even when phone is locked</li>
+                                <li>Zero battery drain — optimized ML pipeline</li>
+                            </ul>
+                        </div>
+                        <span class="feature-card__hint">🔄 Click to flip back</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Distress Sound Recognition -->
+            <div class="feature-card-container reveal">
+                <div class="feature-card-inner">
+                    <div class="feature-card feature-card--front">
+                        <div class="feature-card__icon feature-card__icon--noise">🔊</div>
+                        <h3 class="feature-card__title">Distress Sound Recognition</h3>
+                        <p class="feature-card__desc">
+                            Our audio classification model continuously listens for screams, breaking glass, and other distress sounds. When detected, SafeNetic triggers an automatic emergency response — no button press needed.
+                        </p>
+                        <span class="feature-card__tag feature-card__tag--ai">AI Powered</span>
+                        <span class="feature-card__hint">🔄 Click to learn more</span>
+                    </div>
+                    <div class="feature-card feature-card--back">
+                        <div class="feature-card__back-header">
+                            <span class="feature-card__back-icon">🔊</span>
+                            <h3 class="feature-card__title">How Sound Recognition Works</h3>
+                        </div>
+                        <div class="feature-card__back-section">
+                            <h4 class="feature-card__back-label">⚙️ How It Works</h4>
+                            <p class="feature-card__desc">An on-device audio classifier processes microphone input through a spectrogram pipeline. It's trained to recognize high-urgency sounds — screams, shattering glass, gunshots, and aggressive shouting — with high accuracy while ignoring false positives like music or TV.</p>
+                        </div>
+                        <div class="feature-card__back-section">
+                            <h4 class="feature-card__back-label">✨ Effects</h4>
+                            <ul class="feature-card__effects">
+                                <li>Hands-free emergency detection</li>
+                                <li>Works in background — no app interaction needed</li>
+                                <li>Privacy-first: audio is never recorded or uploaded</li>
+                                <li>Instant alert with location to guardians</li>
+                            </ul>
+                        </div>
+                        <span class="feature-card__hint">🔄 Click to flip back</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- One-Tap SOS -->
+            <div class="feature-card-container reveal">
+                <div class="feature-card-inner">
+                    <div class="feature-card feature-card--front">
+                        <div class="feature-card__icon feature-card__icon--sos">🆘</div>
+                        <h3 class="feature-card__title">One-Tap SOS</h3>
+                        <p class="feature-card__desc">
+                            A large, always-accessible emergency button that instantly sends your live location and an emergency notification to all your registered guardians via push notification and SMS.
+                        </p>
+                        <span class="feature-card__tag feature-card__tag--realtime">Real-Time</span>
+                        <span class="feature-card__hint">🔄 Click to learn more</span>
+                    </div>
+                    <div class="feature-card feature-card--back">
+                        <div class="feature-card__back-header">
+                            <span class="feature-card__back-icon">🆘</span>
+                            <h3 class="feature-card__title">How One-Tap SOS Works</h3>
+                        </div>
+                        <div class="feature-card__back-section">
+                            <h4 class="feature-card__back-label">⚙️ How It Works</h4>
+                            <p class="feature-card__desc">The SOS button is always visible on the main screen. One tap captures your current GPS coordinates, bundles them with a timestamp and your profile, then sends a high-priority push notification and SMS to every registered guardian simultaneously through Firebase Cloud Messaging.</p>
+                        </div>
+                        <div class="feature-card__back-section">
+                            <h4 class="feature-card__back-label">✨ Effects</h4>
+                            <ul class="feature-card__effects">
+                                <li>Sub-2-second alert delivery to all guardians</li>
+                                <li>Direct Google Maps link for navigation</li>
+                                <li>SMS fallback if guardian has no internet</li>
+                                <li>Continuous location sharing during emergency</li>
+                            </ul>
+                        </div>
+                        <span class="feature-card__hint">🔄 Click to flip back</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Guardian Network -->
+            <div class="feature-card-container reveal">
+                <div class="feature-card-inner">
+                    <div class="feature-card feature-card--front">
+                        <div class="feature-card__icon feature-card__icon--guardian">👥</div>
+                        <h3 class="feature-card__title">Guardian Network</h3>
+                        <p class="feature-card__desc">
+                            Add trusted family members, friends, or caregivers as guardians. They receive instant high-priority push notifications with your live GPS location and a direct Google Maps link during emergencies.
+                        </p>
+                        <span class="feature-card__tag feature-card__tag--realtime">Real-Time</span>
+                        <span class="feature-card__hint">🔄 Click to learn more</span>
+                    </div>
+                    <div class="feature-card feature-card--back">
+                        <div class="feature-card__back-header">
+                            <span class="feature-card__back-icon">👥</span>
+                            <h3 class="feature-card__title">How Guardian Network Works</h3>
+                        </div>
+                        <div class="feature-card__back-section">
+                            <h4 class="feature-card__back-label">⚙️ How It Works</h4>
+                            <p class="feature-card__desc">Guardians link via a unique pairing code or QR scan. Once connected, they automatically receive push notifications for all emergency events. The system uses Firebase Realtime Database to sync status, and each guardian gets a dedicated dashboard showing their dependents' safety status.</p>
+                        </div>
+                        <div class="feature-card__back-section">
+                            <h4 class="feature-card__back-label">✨ Effects</h4>
+                            <ul class="feature-card__effects">
+                                <li>Unlimited guardians per user</li>
+                                <li>Real-time safety status dashboard</li>
+                                <li>Two-way communication during emergencies</li>
+                                <li>Notification history and event timeline</li>
+                            </ul>
+                        </div>
+                        <span class="feature-card__hint">🔄 Click to flip back</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="section-header reveal">
+            <span class="section-label">How It Works</span>
+            <h2 class="section-title">Setup in Minutes</h2>
+            <p class="section-subtitle">
+                Get protected in just three simple steps.
+            </p>
+        </div>
+        <div class="steps">
+            <div class="step reveal">
+                <div class="step__indicator">
+                    <div class="step__number">1</div>
+                    <div class="step__line"></div>
+                </div>
+                <div class="step__content">
+                    <h3 class="step__title">Download & Install</h3>
+                    <p class="step__desc">Download the SafeNetic APK and install it on your Android device. Grant the required permissions for location, microphone, and notifications so the AI models can monitor for emergencies.</p>
+                </div>
+            </div>
+            <div class="step reveal">
+                <div class="step__indicator">
+                    <div class="step__number">2</div>
+                    <div class="step__line"></div>
+                </div>
+                <div class="step__content">
+                    <h3 class="step__title">Add Your Guardians</h3>
+                    <p class="step__desc">Invite your trusted contacts — family, friends, or caregivers. They'll install SafeNetic too and receive instant push alerts whenever an emergency is detected on your phone.</p>
+                </div>
+            </div>
+            <div class="step reveal">
+                <div class="step__indicator">
+                    <div class="step__number">3</div>
+                    <div class="step__line"></div>
+                </div>
+                <div class="step__content">
+                    <h3 class="step__title">Stay Protected</h3>
+                    <p class="step__desc">SafeNetic runs silently in the background, continuously monitoring for falls, distress sounds, and motion anomalies. You're protected 24/7 without having to do anything.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section class="download" id="download">
+        <div class="download__card reveal">
+            <h2 class="download__title">Ready to Feel Safer?</h2>
+            <p class="download__subtitle">
+                Download SafeNetic today and set up your guardian network in under two minutes.
+            </p>
+            <div class="download__buttons">
+                <a href="safenetic.apk" class="btn btn--primary btn--download" download>
+                    <span>⬇</span> Download for Android
+                </a>
+                <div class="btn btn--store btn--download">
+                    <span>🍎</span> iOS — Coming Soon
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer__inner">
+            <div class="footer__brand">
+                <a href="#" class="nav__logo" style="font-size: 1.2rem;">
+                    <div class="nav__logo-icon" style="width: 32px; height: 32px; font-size: 1rem;">🛡️</div>
+                    SafeNetic
+                </a>
+                <p class="footer__tagline">AI-powered safety for everyone.</p>
+            </div>
+            <ul class="footer__links">
+                <li><a href="#features" class="footer__link">Features</a></li>
+                <li><a href="#how-it-works" class="footer__link">How It Works</a></li>
+                <li><a href="#download" class="footer__link">Download</a></li>
+            </ul>
+        </div>
+        <div class="footer__bottom">
+            <p class="footer__copy">&copy; 2025 SafeNetic. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

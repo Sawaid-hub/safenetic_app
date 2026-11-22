@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1056760146509",
+    "project_id": "studio-3618135792-31638",
+    "storage_bucket": "studio-3618135792-31638.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1056760146509:android:9f500bd5096b5c655c0a04",
+        "android_client_info": {
+          "package_name": "com.safenetic"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJ77DaKeSipq25lzFQyaF9-nX99xm5iZo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
