@@ -1,25 +1,120 @@
-# Release workflow for semantic version tags
-name: Release
+name: SafeNetic release
+
 on:
   push:
     tags:
       - 'v*.*.*'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
+  checks:
+    name: Run CI for release commit
+    uses: ./.github/workflows/ci.yml
+
   build:
-    runs-on: ubuntu-latest
+    name: Build signed Android APK
+    needs: checks
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
     steps:
-      - uses: actions/checkout@v3
+      - name: Check out release source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Set up Java
+        uses: actions/setup-java@d1374f8ac74474200d16ef8ecee22c7ae7a51880 # v6.3.0
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: gradle
       - name: Set up Flutter
-        uses: subosito/flutter-action@v2
+        uses: subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2 # v2.23.0
         with:
           channel: stable
-      - name: Get dependencies
+          cache: true
+      - name: Verify tag matches app version
+        shell: bash
+        run: |
+          python - "$GITHUB_REF_NAME" <<'PY'
+          import os, re, sys
+          from pathlib import Path
+
+          match = re.search(r"(?m)^version:\s*['\"]?([^'\"+\s]+)", Path("pubspec.yaml").read_text())
+          if not match:
+              raise SystemExit("Could not read the app version from pubspec.yaml")
+          expected = "v" + match.group(1)
+          if sys.argv[1] != expected:
+              raise SystemExit(f"Tag {sys.argv[1]} does not match app version {expected}")
+          PY
+      - name: Configure Android signing
+        env:
+          ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+          GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
+        shell: bash
+        run: |
+          missing=()
+          for name in ANDROID_KEYSTORE_BASE64 ANDROID_KEYSTORE_PASSWORD ANDROID_KEY_ALIAS ANDROID_KEY_PASSWORD GOOGLE_MAPS_API_KEY; do
+            if [[ -z "${!name}" ]]; then missing+=("$name"); fi
+          done
+          if (( ${#missing[@]} )); then
+            printf 'Missing required GitHub Actions secrets: %s\n' "${missing[*]}" >&2
+            exit 1
+          fi
+          printf '%s' "$ANDROID_KEYSTORE_BASE64" | base64 --decode > "$RUNNER_TEMP/safenetic-upload.jks"
+          {
+            printf 'storeFile=%s\n' "$RUNNER_TEMP/safenetic-upload.jks"
+            printf 'storePassword=%s\n' "$ANDROID_KEYSTORE_PASSWORD"
+            printf 'keyAlias=%s\n' "$ANDROID_KEY_ALIAS"
+            printf 'keyPassword=%s\n' "$ANDROID_KEY_PASSWORD"
+          } > android/key.properties
+      - name: Fetch Flutter packages
         run: flutter pub get
-      - name: Build APK (release)
-        run: flutter build apk --release
-      - name: Create GitHub Release
-        uses: softprops/action-gh-release@v1
+      - name: Build release APK
+        env:
+          GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
+        run: flutter build apk --release --no-pub
+      - name: Prepare release files
+        shell: bash
+        run: |
+          mkdir -p dist
+          cp build/app/outputs/flutter-apk/app-release.apk "dist/SafeNetic-${GITHUB_REF_NAME#v}.apk"
+          (cd dist && sha256sum *.apk > SHA256SUMS.txt)
+      - name: Upload signed APK artifact
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
-          tag_name: ${{ github.ref_name }}
-          name: Release ${{ github.ref_name }}
-          files: build/app/outputs/flutter-apk/app-release.apk
+          name: safenetic-release-${{ github.ref_name }}
+          path: dist/*
+          if-no-files-found: error
+          retention-days: 30
+
+  publish:
+    name: Publish GitHub APK release
+    needs: build
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - name: Download signed APK and checksum
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: safenetic-release-${{ github.ref_name }}
+          path: dist
+      - name: Create GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          gh release create "$GITHUB_REF_NAME" dist/* \
+            --verify-tag \
+            --title "SafeNetic ${GITHUB_REF_NAME#v}" \
+            --generate-notes
