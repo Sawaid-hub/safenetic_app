@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
+language: en-US
+reviews:
+  profile: chill
+  high_level_summary: true
+  review_status: true
+  review_progress: true
+  auto_review:
+    enabled: true
+    auto_incremental_review: true
+    auto_pause_after_reviewed_commits: 0
+    drafts: true
+  path_instructions:
+    - path: "lib/**"
+      instructions: |
+        Prioritize safety-critical SOS behavior, alert delivery and fallback paths, authentication and authorization, location privacy and consent, background-service lifecycle, permission handling, and async error handling. Report concrete defects with severity, affected lines, and a practical fix. Avoid style-only comments.
+    - path: "test/**"
+      instructions: |
+        Check that tests cover changed behavior, failure paths, permission and delivery edge cases, and regressions. Do not recommend tests that depend on live Firebase services unless the repository already provides an emulator setup.
+    - path: "backend/**"
+      instructions: |
+        Review authentication and authorization, Firebase Admin access, input validation, data exposure and PII in logs, rate limiting, timeouts, and dependency/security risks. Never suggest committing service-account credentials or printing secret values.
+    - path: "functions/**"
+      instructions: |
+        Review Firebase Functions authorization, request validation, data exposure, PII in logs, abuse controls, and async failure handling. Keep server-only credentials out of the client and CI logs.
+    - path: ".github/workflows/**"
+      instructions: |
+        Review permissions, action pinning, untrusted pull-request handling, secret exposure, release-tag/version checks, artifact integrity, signing-key handling, and whether publishing jobs are isolated from read-only build jobs.
+    - path: "android/**"
+      instructions: |
+        Review Android signing and manifest configuration, Gradle/plugin compatibility, permissions, and API-key restrictions. Android Maps keys embedded in the APK are public identifiers and must be restricted by package name, signing-certificate SHA-1, and the required API only; signing credentials must remain private.
