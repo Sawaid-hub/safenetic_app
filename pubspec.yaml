@@ -11,7 +11,7 @@ dependencies:
     sdk: flutter
 
   # --- Machine Learning ---
-  tflite_flutter: ^0.11.0
+  tflite_flutter: ^0.12.1
   
   # --- Audio Pipeline ---
   flutter_sound: ^9.16.3
