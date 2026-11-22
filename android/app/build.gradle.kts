@@ -1,3 +1,5 @@
+import com.android.build.api.dsl.ApplicationExtension
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import java.util.Properties
 
 plugins {
@@ -42,7 +44,7 @@ dependencies {
     implementation("com.google.firebase:firebase-perf")
 }
 
-android {
+extensions.configure<ApplicationExtension> {
     namespace = "com.safenetic"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
@@ -62,10 +64,6 @@ android {
                 keyPassword = releaseSigningProperties.getProperty("keyPassword")
             }
         }
-    }
-
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17.toString()
     }
 
     defaultConfig {
@@ -97,6 +95,12 @@ android {
                 "proguard-rules.pro"
             )
         }
+    }
+}
+
+kotlin {
+    compilerOptions {
+        jvmTarget = JvmTarget.fromTarget("17")
     }
 }
 
